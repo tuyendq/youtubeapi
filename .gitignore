@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+youtube-nodejs-quickstart.json
+client_secret.json
+credentials.json
+secret_client.json
