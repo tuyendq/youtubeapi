@@ -4,19 +4,19 @@ const youtube = google.youtube('v3')
 
 var playlistId = 'PLroUsGOhJjhJB1sG1cZDDzDZOJs7rbeTd'
 const params = {
-    //key: 'AIzaSyBk4Nm1vWAHT58Z_T-UNYtm6Xbr4_l_wf0',
     key: process.env.YOUTUBE_API_KEY,
     part: 'snippet',
     // fields: 'items(id, snippet(channelId,title,categoryId))',
     playlistId: playlistId,
-    maxResult: 1
+    maxResult: 2
 }
 youtube.playlistItems.list(params, (err, res) =>{
     if (err) {
         console.error(err)
         throw err
     }
-    console.log(JSON.stringify(res.data))
+    // console.log(JSON.stringify(res.data))
+    console.log(res)
 })
 // youtube.playlistItems.list({
 //     key: process.env.YOUTUBE_API_KEY,
