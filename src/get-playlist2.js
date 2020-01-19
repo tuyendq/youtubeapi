@@ -16,7 +16,10 @@ youtube.playlistItems.list(params, (err, res) =>{
         throw err
     }
     // console.log(JSON.stringify(res.data))
-    console.log(res)
+    (res.data.items).forEach(element => {
+        console.log(element.snippet.title + ',' + element.snippet.channelTitle + ',' + element.snippet.resourceId.videoId + ',' +
+        element.snippet.thumbnails.high.url)
+    });
 })
 // youtube.playlistItems.list({
 //     key: process.env.YOUTUBE_API_KEY,
