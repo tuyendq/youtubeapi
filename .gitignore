@@ -107,3 +107,5 @@ youtube-nodejs-quickstart.json
 client_secret.json
 credentials.json
 secret_client.json
+
+.env
