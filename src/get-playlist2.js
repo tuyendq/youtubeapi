@@ -6,7 +6,6 @@ var playlistId = 'PLroUsGOhJjhJB1sG1cZDDzDZOJs7rbeTd'
 const params = {
     key: process.env.YOUTUBE_API_KEY,
     part: 'snippet',
-    // fields: 'items(id, snippet(channelId,title,categoryId))',
     playlistId: playlistId,
     maxResult: 2
 }
