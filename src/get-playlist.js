@@ -8,10 +8,9 @@ var playlistFile = path.join(__dirname, playlistId) + '.json';
 ypi(process.env.YOUTUBE_API_KEY, playlistId)
     .then(items => {
         // console.log(JSON.stringify(items))
-        // fs.appendFile(playlistFile, JSON.stringify(items), (err) => {
-        fs.appendFile(playlistFile, items, (err) => {
+        fs.writeFile(playlistFile, JSON.stringify(items), (err) => {
             if (err) throw err;
-            console.log(`Playlist saved in ${playlistFile}`);
-        })
+            console.log(`Playlist of ${items.length} videos saved in ${playlistFile}`);
+        });
     })
     .catch(console.error)
