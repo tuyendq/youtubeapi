@@ -3,10 +3,13 @@
 const dotenv = require('dotenv').config();
 const {google} = require('googleapis');
 
-const youtube = google.youtube('v3');
+const youtube = google.youtube({
+    version: 'v3'
+});
 
 // var videoId = 'Ks-_Mh1QhMc';
-var videoId = process.argv[2];
+var videoId = process.argv[2] || 'Ks-_Mh1QhMc';
+console.log(`Get video info: ${videoId}`);
 
 const params = {
     key: process.env.YOUTUBE_API_KEY,
@@ -14,22 +17,37 @@ const params = {
     id: videoId
 };
 
-var result = youtube.videos.list(params, (err, res) => {
+var object = {};
+// youtube.videos.list(params, function (err, res) {
+//         if (err) {
+//             console.error(err);
+//         }
+//         console.log(`Result: ${res}`);
+//         object = res.data.items;
+// });
+const videoInfo = youtube.videos.list(params, (err, res) => {
     if (err) {
+        console.log(`Error occured:\n`);
         console.error(err);
     }
-    
-    // console.log(`${res.data.items[0].id}\n${res.data.items[0].snippet.title}\n${res.data.items[0].snippet.channelTitle}\n${res.data.items[0].snippet.description}\n`);
-    let result = {
-        id: res.data.items[0].id,
-        title: res.data.items[0].snippet.title,
-        labels: [res.data.items[0].snippet.channelTitle],
-        description: res.data.items[0].snippet.description
-    }
-    console.log(result);
-})
+    console.log(`Result: ${JSON.stringify(res.data.items[0])}`);
+    object = res.data.items[0];
+});
+
+(async function getVideoInfo() {
+    console.log(`---Begin: ${JSON.stringify(object)}`);
+    await sleep(3000);
+    console.log(`---/After: ${JSON.stringify(object)}`);
+})();
 
 
+// var printResult = async function () {
+//     await sleep(1000);
+//     console.log(object);
+// };
 
-
-
+function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
